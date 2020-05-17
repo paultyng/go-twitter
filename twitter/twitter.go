@@ -11,9 +11,10 @@ const twitterAPI = "https://api.twitter.com/1.1/"
 // Client is a Twitter client for making Twitter API requests.
 type Client struct {
 	sling *sling.Sling
+
 	// Twitter API Services
 	Accounts       *AccountService
-	Block          *BlockService
+	Blocks         *BlockService
 	DirectMessages *DirectMessageService
 	Favorites      *FavoriteService
 	Followers      *FollowerService
@@ -34,9 +35,10 @@ type Client struct {
 func NewClient(httpClient *http.Client) *Client {
 	base := sling.New().Client(httpClient).Base(twitterAPI)
 	return &Client{
-		sling:          base,
+		sling: base,
+
 		Accounts:       newAccountService(base.New()),
-		Block:          newBlockService(base.New()),
+		Blocks:         newBlockService(base.New()),
 		DirectMessages: newDirectMessageService(base.New()),
 		Favorites:      newFavoriteService(base.New()),
 		Followers:      newFollowerService(base.New()),
